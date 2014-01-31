@@ -53,7 +53,7 @@ class iOSCheckbox
   # Disable IE text selection, other browsers are handled in CSS
   disableTextSelection: ->
     # Elements containing text should be unselectable
-    if $.browser.msie
+    if $("html").hasClass("no-flexboxlegacy")
       $([@handle, @offLabel, @onLabel, @container]).attr("unselectable", "on")
 
   _getDimension: (elem, dimension) ->
@@ -168,7 +168,7 @@ class iOSCheckbox
     @offLabel.css(width: containerWidth - @containerRadius)
 
     offset     = @containerRadius + 1
-    offset     -= 3 if $.browser.msie and $.browser.version < 7
+    offset     -= 3 if $("html").hasClass("no-flexboxlegacy")
     @rightSide = containerWidth - @_getDimension(@handle, "width") - offset
 
     if @elem.is(':checked')
